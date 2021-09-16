@@ -361,3 +361,19 @@ require get_template_directory() . '/inc/customizer.php';
  * Block Patterns.
  */
 require get_template_directory() . '/inc/block-patterns.php';
+
+function wpse_setup_theme() {
+	add_theme_support( 'post-thumbnails' );
+	add_image_size( 'image-size', 1500, 1250, true );
+ }
+  
+ add_action( 'after_setup_theme', 'wpse_setup_theme' );
+
+ add_filter( 'image_size_names_choose', 'my_custom_sizes' );
+  
+ function my_custom_sizes( $sizes ) {
+	 return array_merge( $sizes, array(
+		 'image-size' => __('image-size'),
+		 
+	 ) );
+ }
